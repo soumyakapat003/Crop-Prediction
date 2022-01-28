@@ -16,7 +16,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title("CROP PREDICTION")
 
-df = pd.read_csv('https://github.com/soumyakapat003/Crop-Prediction/blob/main/Crop1.csv')
+df = pd.read_csv('https://github.com/soumyakapat003/Crop-Prediction/blob/main/Crop1.csv',error_bad_lines=False)
 #st.write(df)
 
 shape = df.shape
