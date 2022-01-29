@@ -16,14 +16,26 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.title("CROP PREDICTION")
 
-df = pd.read_csv('Crop1.csv',error_bad_lines=False)
+@st.cache
+
+def readCsv(Csv):
+  df = pd.read_csv(Csv)
+  return df
+Csv = 'Crop1.csv'
+df = readCsv(Csv)
 #st.write(df)
 
 shape = df.shape
 
 # Splitting the dataset into input and output values
-X = df.iloc[:, 0:7]
-y = df.iloc[:, 7]
+def SplitInput(df,a,b):
+  X = df.iloc[:, a:b]
+  return X
+def SplitOutput(df,a):
+  y = df.iloc[:, a]
+  return y
+X = SplitInput(df,0,7)
+y = SplitOutput(df,7)
 
 st.write("### Explore dataset")
 
@@ -55,67 +67,69 @@ st.write("### Visualization the dataset")
 data_visualization = st.sidebar.selectbox("Select features vs Crop type for visualization",
                      ("None","Ph Vs Crop type","Humidity Vs Crop type","Temperature Vs Crop type","Rainfall Vs Crop type","Potassium Vs Crop type","Nitrogen Vs Crop type","Phosphorus Vs Crop type"))
 
-if data_visualization == "None":
-    st.write("")
-elif data_visualization == "Ph Vs Crop type":
-    st.write("Ph Vs Crop type")
-    sns.barplot(x='Croptype',y='ph',data=df)
-    plt.xticks(rotation=270)
-    plt.title("Ph Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Ph")
-    st.pyplot()
-elif data_visualization == "Humidity Vs Crop type":
-    st.write("Humidity Vs Crop type")
-    sns.barplot(x='Croptype',y='humidity',data=df,palette='bright')
-    plt.xticks(rotation=270)
-    plt.title("Humidity Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Humidity")
-    st.pyplot()
-elif data_visualization == "Temperature Vs Crop type":
-    st.write("Temperature Vs Crop type")
-    sns.barplot(x='Croptype',y='temperature',data=df,palette='dark')
-    plt.xticks(rotation=270)
-    plt.title("Temperature Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Temperature")
-    st.pyplot()
-elif data_visualization == "Rainfall Vs Crop type":
-    st.write("Rainfall Vs Crop type")
-    sns.barplot(x='Croptype',y='rainfall',data=df,palette='colorblind')
-    plt.xticks(rotation=270)
-    plt.title("Rainfall Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Rainfall")
-    st.pyplot()
-elif data_visualization == "Potassium Vs Crop type":
-    st.write("Potassium Vs Crop type")
-    K1 = X.iloc[:,2]
-    plt.bar(y,K1,color="Red")
-    plt.xticks(rotation=270)
-    plt.title("Potassium Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Potassium")
-    st.pyplot()
-elif data_visualization == "Nitrogen Vs Crop type":
-    st.write("Nitrogen Vs Crop type")
-    N1 = X.iloc[:,0]
-    plt.bar(y,N1,color="Green")
-    plt.xticks(rotation=270)
-    plt.title("Nitrogen Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("Nitrogen")
-    st.pyplot()
-elif data_visualization == "Phosphorus Vs Crop type":
-    st.write("Phosphorus  Vs Crop type")
-    P1 = X.iloc[:,1]
-    plt.bar(y,P1,color="Magenta")
-    plt.xticks(rotation=270)
-    plt.title("phosphorus Vs Crop type")
-    plt.xlabel("Crop type")
-    plt.ylabel("phosphorus")
-    st.pyplot()
+def Graphs(data_visualization):
+  if data_visualization == "None":
+      st.write("")
+  elif data_visualization == "Ph Vs Crop type":
+      st.write("Ph Vs Crop type")
+      sns.barplot(x='Croptype',y='ph',data=df)
+      plt.xticks(rotation=270)
+      plt.title("Ph Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Ph")
+      st.pyplot()
+  elif data_visualization == "Humidity Vs Crop type":
+      st.write("Humidity Vs Crop type")
+      sns.barplot(x='Croptype',y='humidity',data=df,palette='bright')
+      plt.xticks(rotation=270)
+      plt.title("Humidity Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Humidity")
+      st.pyplot()
+  elif data_visualization == "Temperature Vs Crop type":
+      st.write("Temperature Vs Crop type")
+      sns.barplot(x='Croptype',y='temperature',data=df,palette='dark')
+      plt.xticks(rotation=270)
+      plt.title("Temperature Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Temperature")
+      st.pyplot()
+  elif data_visualization == "Rainfall Vs Crop type":
+      st.write("Rainfall Vs Crop type")
+      sns.barplot(x='Croptype',y='rainfall',data=df,palette='colorblind')
+      plt.xticks(rotation=270)
+      plt.title("Rainfall Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Rainfall")
+      st.pyplot()
+  elif data_visualization == "Potassium Vs Crop type":
+      st.write("Potassium Vs Crop type")
+      K1 = X.iloc[:,2]
+      plt.bar(y,K1,color="Red")
+      plt.xticks(rotation=270)
+      plt.title("Potassium Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Potassium")
+      st.pyplot()
+  elif data_visualization == "Nitrogen Vs Crop type":
+      st.write("Nitrogen Vs Crop type")
+      N1 = X.iloc[:,0]
+      plt.bar(y,N1,color="Green")
+      plt.xticks(rotation=270)
+      plt.title("Nitrogen Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("Nitrogen")
+      st.pyplot()
+  elif data_visualization == "Phosphorus Vs Crop type":
+      st.write("Phosphorus  Vs Crop type")
+      P1 = X.iloc[:,1]
+      plt.bar(y,P1,color="Magenta")
+      plt.xticks(rotation=270)
+      plt.title("phosphorus Vs Crop type")
+      plt.xlabel("Crop type")
+      plt.ylabel("phosphorus")
+      st.pyplot()
+Graphs(data_visualization)
 
 st.write("### Explore different classification model")
 
@@ -200,69 +214,66 @@ else:
     st.pyplot()
 
 # Prediction of Crop by user input
-st.write("### Prediction by user input")
-if classifier_name == "None":
-    st.write("Predicted crop is: None")
-else:
-    a=st.number_input('Enter the Nitrogen value in soil: ')
-    b=st.number_input('Enter the Phosphorus value in soil: ')
-    c=st.number_input('Enter the Potassium value in soil: ')
-    d=st.number_input('Enter the Temperature: ')
-    e=st.number_input('Enter the Humidity: ')
-    f=st.number_input('Enter the ph level of the soil: ')
-    g=st.number_input('Enter the rainfall: ')
-    
-    if (a == 0 and b == 0 and c == 0 and d == 0 and e == 0 and f == 0 and g == 0):
+def UserInput(classifier_name,clf):
+    st.write("### Prediction by user input")
+    if classifier_name == "None":
         st.write("Predicted crop is: None")
     else:
-        P = int(clf.predict([[a,b,c,d,e,f,g]]))
-        #print(P)
-        if P==0:
-          st.write("Predicted crop is: apple")
-        elif P==1:
-          st.write("Predicted crop is: banana")
-        elif P==2:
-          st.write("Predicted crop is: blackgram")
-        elif P==3:
-          st.write("Predicted crop is: chickpea")
-        elif P==4:
-          st.write("Predicted crop is: coconut")
-        elif P==5:
-          st.write("Predicted crop is: coffee")
-        elif P==6:
-          st.write("Predicted crop is: cotton")
-        elif P==7:
-          st.write("Predicted crop is: grapes")
-        elif P==8:
-          st.write("Predicted crop is: jute")
-        elif P==9:
-          st.write("Predicted crop is: kidneybeans")
-        elif P==10:
-          st.write("Predicted crop is: lentil")
-        elif P==11:
-          st.write("Predicted crop is: maize")
-        elif P==12:
-          st.write("Predicted crop is: mango")
-        elif P==13:
-          st.write("Predicted crop is: mothbeans")
-        elif P==14:
-          st.write("Predicted crop is: mungbean")
-        elif P==15:
-          st.write("Predicted crop is: muskmelon")
-        elif P==16:
-          st.write("Predicted crop is: orange")
-        elif P==17:
-          st.write("Predicted crop is: papaya")
-        elif P==18:
-          st.write("Predicted crop is: pigeonpeas")
-        elif P==19:
-          st.write("Predicted crop is: pomegranate")
-        elif P==20:
-          st.write("Predicted crop is: rice")
-        elif P==21:
-          st.write("Predicted crop is: watermelon")
-    
-    
-    
-    
-    
+        a=st.number_input('Enter the Nitrogen value in soil: ')
+        b=st.number_input('Enter the Phosphorus value in soil: ')
+        c=st.number_input('Enter the Potassium value in soil: ')
+        d=st.number_input('Enter the Temperature: ')
+        e=st.number_input('Enter the Humidity: ')
+        f=st.number_input('Enter the ph level of the soil: ')
+        g=st.number_input('Enter the rainfall: ')
+        
+        if (a == 0 and b == 0 and c == 0 and d == 0 and e == 0 and f == 0 and g == 0):
+            st.write("Predicted crop is: None")
+        else:
+            P = int(clf.predict([[a,b,c,d,e,f,g]]))
+            #print(P)
+            if P==0:
+              st.write("Predicted crop is: apple")
+            elif P==1:
+              st.write("Predicted crop is: banana")
+            elif P==2:
+              st.write("Predicted crop is: blackgram")
+            elif P==3:
+              st.write("Predicted crop is: chickpea")
+            elif P==4:
+              st.write("Predicted crop is: coconut")
+            elif P==5:
+              st.write("Predicted crop is: coffee")
+            elif P==6:
+              st.write("Predicted crop is: cotton")
+            elif P==7:
+              st.write("Predicted crop is: grapes")
+            elif P==8:
+              st.write("Predicted crop is: jute")
+            elif P==9:
+              st.write("Predicted crop is: kidneybeans")
+            elif P==10:
+              st.write("Predicted crop is: lentil")
+            elif P==11:
+              st.write("Predicted crop is: maize")
+            elif P==12:
+              st.write("Predicted crop is: mango")
+            elif P==13:
+              st.write("Predicted crop is: mothbeans")
+            elif P==14:
+              st.write("Predicted crop is: mungbean")
+            elif P==15:
+              st.write("Predicted crop is: muskmelon")
+            elif P==16:
+              st.write("Predicted crop is: orange")
+            elif P==17:
+              st.write("Predicted crop is: papaya")
+            elif P==18:
+              st.write("Predicted crop is: pigeonpeas")
+            elif P==19:
+              st.write("Predicted crop is: pomegranate")
+            elif P==20:
+              st.write("Predicted crop is: rice")
+            elif P==21:
+              st.write("Predicted crop is: watermelon")
+UserInput(classifier_name,clf)
