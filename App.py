@@ -214,66 +214,64 @@ else:
     st.pyplot()
 
 # Prediction of Crop by user input
-def UserInput(classifier_name,clf):
-    st.write("### Prediction by user input")
-    if classifier_name == "None":
-        st.write("Predicted crop is: None")
-    else:
-        a=st.number_input('Enter the Nitrogen value in soil: ')
-        b=st.number_input('Enter the Phosphorus value in soil: ')
-        c=st.number_input('Enter the Potassium value in soil: ')
-        d=st.number_input('Enter the Temperature: ')
-        e=st.number_input('Enter the Humidity: ')
-        f=st.number_input('Enter the ph level of the soil: ')
-        g=st.number_input('Enter the rainfall: ')
+st.write("### Prediction by user input")
+if classifier_name == "None":
+    st.subheader("Predicted crop is: None")
+else:
+    a=st.number_input('Enter the Nitrogen value in soil: ')
+    b=st.number_input('Enter the Phosphorus value in soil: ')
+    c=st.number_input('Enter the Potassium value in soil: ')
+    d=st.number_input('Enter the Temperature: ')
+    e=st.number_input('Enter the Humidity: ')
+    f=st.number_input('Enter the ph level of the soil: ')
+    g=st.number_input('Enter the rainfall: ')
         
-        if (a == 0 and b == 0 and c == 0 and d == 0 and e == 0 and f == 0 and g == 0):
-            st.write("Predicted crop is: None")
-        else:
-            P = int(clf.predict([[a,b,c,d,e,f,g]]))
-            #print(P)
-            if P==0:
-              st.write("Predicted crop is: apple")
-            elif P==1:
-              st.write("Predicted crop is: banana")
-            elif P==2:
-              st.write("Predicted crop is: blackgram")
-            elif P==3:
-              st.write("Predicted crop is: chickpea")
-            elif P==4:
-              st.write("Predicted crop is: coconut")
-            elif P==5:
-              st.write("Predicted crop is: coffee")
-            elif P==6:
-              st.write("Predicted crop is: cotton")
-            elif P==7:
-              st.write("Predicted crop is: grapes")
-            elif P==8:
-              st.write("Predicted crop is: jute")
-            elif P==9:
-              st.write("Predicted crop is: kidneybeans")
-            elif P==10:
-              st.write("Predicted crop is: lentil")
-            elif P==11:
-              st.write("Predicted crop is: maize")
-            elif P==12:
-              st.write("Predicted crop is: mango")
-            elif P==13:
-              st.write("Predicted crop is: mothbeans")
-            elif P==14:
-              st.write("Predicted crop is: mungbean")
-            elif P==15:
-              st.write("Predicted crop is: muskmelon")
-            elif P==16:
-              st.write("Predicted crop is: orange")
-            elif P==17:
-              st.write("Predicted crop is: papaya")
-            elif P==18:
-              st.write("Predicted crop is: pigeonpeas")
-            elif P==19:
-              st.write("Predicted crop is: pomegranate")
-            elif P==20:
-              st.write("Predicted crop is: rice")
-            elif P==21:
-              st.write("Predicted crop is: watermelon")
-UserInput(classifier_name,clf)
+    if (a == 0 and b == 0 and c == 0 and d == 0 and e == 0 and f == 0 and g == 0):
+        st.subheader("Predicted crop is: None")
+    else:
+        P = int(clf.predict([[a,b,c,d,e,f,g]]))
+        #print(P)
+        if P==0:
+            st.subheader("Predicted crop is: apple")
+        elif P==1:
+            st.subheader("Predicted crop is: banana")
+        elif P==2:
+            st.subheader("Predicted crop is: blackgram")
+        elif P==3:
+            st.subheader("Predicted crop is: chickpea")
+        elif P==4:
+            st.subheader("Predicted crop is: coconut")
+        elif P==5:
+            st.subheader("Predicted crop is: coffee")
+        elif P==6:
+            st.subheader("Predicted crop is: cotton")
+        elif P==7:
+            st.subheader("Predicted crop is: grapes")
+        elif P==8:
+            st.subheader("Predicted crop is: jute")
+        elif P==9:
+            st.subheader("Predicted crop is: kidneybeans")
+        elif P==10:
+            st.subheader("Predicted crop is: lentil")
+        elif P==11:
+            st.subheader("Predicted crop is: maize")
+        elif P==12:
+            st.subheader("Predicted crop is: mango")
+        elif P==13:
+            st.subheader("Predicted crop is: mothbeans")
+        elif P==14:
+            st.subheader("Predicted crop is: mungbean")
+        elif P==15:
+            st.subheader("Predicted crop is: muskmelon")
+        elif P==16:
+            st.subheader("Predicted crop is: orange")
+        elif P==17:
+            st.subheader("Predicted crop is: papaya")
+        elif P==18:
+            st.subheader("Predicted crop is: pigeonpeas")
+        elif P==19:
+            st.subheader("Predicted crop is: pomegranate")
+        elif P==20:
+            st.subheader("Predicted crop is: rice")
+        elif P==21:
+            st.subheader("Predicted crop is: watermelon")
