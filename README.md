@@ -8,4 +8,5 @@ I have used four model in this project. These are the models I have used-
 (iii) K nearest neighbors
 (iv) Logistic regression
 
-# You can Sea this Crop Prediction Model by this web app link: https://share.streamlit.io/soumyakapat003/crop-prediction/main/App.py
+# You can Sea this Crop Prediction Model by this web app link: 
+https://share.streamlit.io/soumyakapat003/crop-prediction/main/App.py
